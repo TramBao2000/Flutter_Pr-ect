@@ -1,90 +1,124 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:iowallet/mainView/home/HomeTabBar.dart';
 
 class Login extends StatelessWidget {
   var _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('IO Media'),
-        automaticallyImplyLeading: false,
+        title: const Text('Đăng nhập'),
       ),
       body: Container(
-          color: Colors.white,
-          child: Column(children: [
-            Container(
-              margin: const EdgeInsets.only(top: 10.0),
-              child:  Row(children: [
-                ElevatedButton(
-                  child: Text('Tìm hiểu về Ví IO'),
-                  onPressed: () => moveToExercise(context),
-                ),
+        color: Colors.white,
+        child: Column(children: [
+          Container(
+            margin: const EdgeInsets.only(top: 10.0),
+            child: Row(
+              children: [
                 Spacer(),
                 ElevatedButton(
                   child: Text('Hỗ trợ'),
                   onPressed: () => moveToHome(context),
                 ),
-              ],),
+              ],
             ),
-
-            Image(
-              width: MediaQuery.of(context).size.width * 0.6,
-                height: MediaQuery.of(context).size.height * 0.2,
-                image: AssetImage('assets/photos/pic1.png')),
-            TextField(
-              controller: _controller,
+          ),
+          Text("Xin chào"),
+          Text("Nguyễn Tiến Truyền"),
+          CircleAvatar(
+            radius: 48, // Image radius
+            backgroundImage: NetworkImage(
+                'https://www.dungplus.com/wp-content/uploads/2019/12/girl-xinh-1-480x600.jpg'),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 50.0),
+            alignment: Alignment.center,
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly
+              ],
+              obscureText: true,
+              obscuringCharacter: 'o',
               textAlign: TextAlign.center,
+              maxLength: 6,
               decoration: InputDecoration(
-                hintText: "nhập số điện thoại",
-                suffixIcon: IconButton(
-                  onPressed: _controller.clear,
-                  icon: Icon(Icons.highlight_remove_outlined),
+                label: const Center(
+                  child: Text("Nhập mật khẩu để đăng nhập"),
+                ),
+                labelStyle:
+                    TextStyle(fontSize: 14, color: Colors.grey.shade400),
+                hintText: 'Password',
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade300,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                    )),
+                suffixIcon: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // added line
+                  mainAxisSize: MainAxisSize.min,
+                  // added line
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.visibility_off_rounded),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      onPressed: _controller.clear,
+                      icon: Icon(Icons.highlight_remove_outlined),
+                    ),
+                  ],
                 ),
               ),
             ),
-            Row(children: [
-              Icon(Icons.alarm),
-              Text("Số điện thoại không chính xác. Quý khách vui lòng kiểm tra lại",
-              style: TextStyle(
-                color: Colors.red
-              ))
-            ],),
-            Container(
-              margin: const EdgeInsets.only(top: 30.0),
-              child: ElevatedButton(
-                child: Text('Tiếp tục'),
-                onPressed: () => moveToHome(context),
-              ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10.0),
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  child: Text('Quên mật khẩu ?'),
+                  onPressed: () => moveToHome(context),
+                ),
+                Spacer(),
+                ElevatedButton(
+                  child: Text('Đổi SĐT'),
+                  onPressed: () => moveToHome(context),
+                ),
+              ],
             ),
-
-          ]),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 30.0),
+            child: ElevatedButton(
+              child: Text('Đăng nhập'),
+              onPressed: () => moveToHome(context),
+            ),
+          ),
+        ]),
       ),
     );
-    // return Container(
-    //   color: Colors.red,
-    //   child: Column(children: [
-    //     MaterialButton(
-    //       child: Text('Move'),
-    //       onPressed: () => moveToExercise(context),
-    //     ),
-    //     MaterialButton(
-    //       child: Text('Back'),
-    //       onPressed: () => moveToHome(context),
-    //     ),
-    //   ]),
-    // );
   }
 
-  moveToExercise(BuildContext context) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => IndexPage(),
-    //     ));
-  }
   moveToHome(BuildContext context) {
-    Navigator.of(context).pop();
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeTabBar(),
+        ));
   }
 }

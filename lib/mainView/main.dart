@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:iowallet/mainView/common/OTPVerify.dart';
+import 'package:iowallet/mainView/home/HomeTabBar.dart';
+import 'package:iowallet/mainView/register/Register.dart';
 
+import 'Start.dart';
+import 'home/InfoPersonal.dart';
 import 'login/Login.dart';
+import 'noticeboard/NoticeBoard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +32,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Login(),
+      home: InfoPersonal(),
     );
   }
 }
