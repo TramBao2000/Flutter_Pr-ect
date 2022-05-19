@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:iowallet/mainView/common/OTPVerify.dart';
+import 'package:iowallet/mainView/home/Account.dart';
 import 'package:iowallet/mainView/home/HomeTabBar.dart';
+import 'package:iowallet/mainView/kyc/PreStartKYC.dart';
 import 'package:iowallet/mainView/register/Register.dart';
 
 import '../generated/l10n.dart';
 import 'Start.dart';
-import 'home/InfoPersonal.dart';
+import 'account/InfoPersonal.dart';
+import 'banking/ListTaskWithMoneyBanking.dart';
 import 'login/Login.dart';
 import 'noticeboard/NoticeBoard.dart';
 
@@ -41,7 +44,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: HomeTabBar(),
+      home: Start(),
     );
   }
 }

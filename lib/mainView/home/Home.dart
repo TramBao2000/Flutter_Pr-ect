@@ -60,14 +60,14 @@ class Home extends StatelessWidget {
                   child: GFCarousel(
                     autoPlay: true,
                     enableInfiniteScroll: true,
-                    pagerSize: 100,
+                //    pagerSize: 100,
                     items: imageList.map(
                           (url) {
                         return Container(
-                          margin: EdgeInsets.all(8.0),
+                          margin: EdgeInsets.all(0.0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.all(
-                                Radius.circular(5.0)),
+                                Radius.circular(0.0)),
                             child: Image.network(url,
                                 fit: BoxFit.cover, width: 1000.0),
                           ),

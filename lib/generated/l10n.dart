@@ -100,10 +100,10 @@ class S {
     );
   }
 
-  /// `Thanh toán`
+  /// `Checkout`
   String get payment {
     return Intl.message(
-      'Thanh toán',
+      'Checkout',
       name: 'payment',
       desc: '',
       args: [],
@@ -125,6 +125,16 @@ class S {
     return Intl.message(
       'Số dư ví (VND)',
       name: 'wallet_balance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unauthenticated`
+  String get account_state_unauthenticated {
+    return Intl.message(
+      'Unauthenticated',
+      name: 'account_state_unauthenticated',
       desc: '',
       args: [],
     );

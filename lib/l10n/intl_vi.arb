@@ -6,5 +6,6 @@
   "setup": "Cài đặt",
   "payment": "Thanh toán",
   "wallet_name": "Ví IO",
-  "wallet_balance": "Số dư ví (VND)"
+  "wallet_balance": "Số dư ví (VND)",
+  "account_state_unauthenticated": "Chưa xác thực"
 }

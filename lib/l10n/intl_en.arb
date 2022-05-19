@@ -4,7 +4,8 @@
   "introduce": "Giới thiệu",
   "sign_out": "Đăng xuất",
   "setup": "Cài đặt",
-  "payment": "Thanh toán",
+  "payment": "Checkout",
   "wallet_name": "Ví IO",
-  "wallet_balance": "Số dư ví (VND)"
+  "wallet_balance": "Số dư ví (VND)",
+  "account_state_unauthenticated": "Unauthenticated"
 }

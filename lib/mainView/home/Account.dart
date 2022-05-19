@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:iowallet/mainView/home/InfoPersonal.dart';
+import 'package:iowallet/mainView/account/InfoPersonal.dart';
+import 'package:iowallet/mainView/account/ListBillCheckout.dart';
+import 'package:iowallet/mainView/banking/ListTaskWithMoneyBanking.dart';
+import 'package:iowallet/mainView/banking/PreLinkWithAccountBank.dart';
+import 'package:iowallet/mainView/kyc/PreStartKYC.dart';
 
 import '../../generated/l10n.dart';
 
@@ -66,7 +70,8 @@ class Account extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.only(
                                 top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
-                            child: Text("Chưa xác thực",
+                            child: Text(
+                                S.of(context).account_state_unauthenticated,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.red // light
@@ -109,7 +114,7 @@ class Account extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(
                         top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
-                    child: Row(
+                    child: InkWell(child: Row(
                       children: [
                         Icon(
                           Icons.access_time_outlined,
@@ -138,6 +143,13 @@ class Account extends StatelessWidget {
                         Icon(Icons.arrow_forward_ios_rounded),
                       ],
                     ),
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ListTaskWithMoneyBanking(),
+                          ));
+                    },)
                   ),
                   Container(
                     margin: const EdgeInsets.only(
@@ -148,7 +160,7 @@ class Account extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(
                         top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
-                    child: Row(
+                    child: InkWell(child: Row(
                       children: [
                         Icon(
                           Icons.access_time_outlined,
@@ -168,6 +180,13 @@ class Account extends StatelessWidget {
                         Icon(Icons.arrow_forward_ios_rounded),
                       ],
                     ),
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PreLinkWithAccountBank(),
+                          ));
+                    },)
                   ),
                   Container(
                     margin: const EdgeInsets.only(
@@ -178,7 +197,7 @@ class Account extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(
                         top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
-                    child: Row(
+                    child: InkWell(child: Row(
                       children: [
                         Icon(
                           Icons.access_time_outlined,
@@ -198,6 +217,13 @@ class Account extends StatelessWidget {
                         Icon(Icons.arrow_forward_ios_rounded),
                       ],
                     ),
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ListBillCheckout(),
+                          ));
+                    },)
                   ),
                   Container(
                     margin: const EdgeInsets.only(
@@ -335,3 +361,4 @@ class Account extends StatelessWidget {
     Navigator.of(context).pop();
   }
 }
+
