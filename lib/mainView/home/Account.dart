@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iowallet/mainView/home/InfoPersonal.dart';
 
+import '../../generated/l10n.dart';
+
 class Account extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -8,7 +10,7 @@ class Account extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Tài khoản'),
+        title: Text(S.of(context).account),
         automaticallyImplyLeading: false,
       ),
       body: Container(
@@ -119,12 +121,12 @@ class Account extends StatelessWidget {
                           ),
                           child: Column(
                             children: [
-                              Text("Ví IO",
+                              Text(S.of(context).wallet_name,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w300, // light
                                     fontStyle: FontStyle.italic, // italic
                                   )),
-                              Text("Số dư ví (VND)",
+                              Text(S.of(context).wallet_balance,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w300, // light
                                     fontStyle: FontStyle.italic, // italic
@@ -156,7 +158,7 @@ class Account extends StatelessWidget {
                           margin: const EdgeInsets.only(
                             left: 18.0,
                           ),
-                          child: Text("Quản lý thẻ/Tài khoản",
+                          child: Text(S.of(context).card_manage,
                               style: TextStyle(
                                 fontWeight: FontWeight.w300, // light
                                 fontStyle: FontStyle.italic, // italic
@@ -186,7 +188,7 @@ class Account extends StatelessWidget {
                           margin: const EdgeInsets.only(
                             left: 18.0,
                           ),
-                          child: Text("Thanh toán",
+                          child: Text(S.of(context).payment,
                               style: TextStyle(
                                 fontWeight: FontWeight.w300, // light
                                 fontStyle: FontStyle.italic, // italic
@@ -237,7 +239,7 @@ class Account extends StatelessWidget {
                           margin: const EdgeInsets.only(
                             left: 18.0,
                           ),
-                          child: Text("Cài đặt",
+                          child: Text(S.of(context).setup,
                               style: TextStyle(
                                 fontWeight: FontWeight.w300, // light
                                 fontStyle: FontStyle.italic, // italic
@@ -267,7 +269,7 @@ class Account extends StatelessWidget {
                           margin: const EdgeInsets.only(
                             left: 18.0,
                           ),
-                          child: Text("Giới thiệu",
+                          child: Text(S.of(context).introduce,
                               style: TextStyle(
                                 fontWeight: FontWeight.w300, // light
                                 fontStyle: FontStyle.italic, // italic
@@ -297,7 +299,7 @@ class Account extends StatelessWidget {
                           margin: const EdgeInsets.only(
                             left: 18.0,
                           ),
-                          child: Text("Đăng xuất",
+                          child: Text(S.of(context).sign_out,
                               style: TextStyle(
                                 fontWeight: FontWeight.w300, // light
                                 fontStyle: FontStyle.italic, // italic

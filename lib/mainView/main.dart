@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:iowallet/mainView/common/OTPVerify.dart';
 import 'package:iowallet/mainView/home/HomeTabBar.dart';
 import 'package:iowallet/mainView/register/Register.dart';
 
+import '../generated/l10n.dart';
 import 'Start.dart';
 import 'home/InfoPersonal.dart';
 import 'login/Login.dart';
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Ví điện tử iPay',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -32,6 +34,13 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       home: HomeTabBar(),
     );
   }
