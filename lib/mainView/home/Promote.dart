@@ -5,17 +5,8 @@ class Promote extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      color: Colors.red,
-      child: Column(children: [
-        MaterialButton(
-          child: Text('Move'),
-          onPressed: () => moveToExercise(context),
-        ),
-        MaterialButton(
-          child: Text('Back'),
-          onPressed: () => moveToHome(context),
-        ),
-      ]),
+      color: Colors.white,
+      child: Center(child: Text("Ưu đãi"),)
     );
   }
 

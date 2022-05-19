@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:iowallet/mainView/common/Policy.dart';
+import 'package:iowallet/mainView/common/UserManual.dart';
 import 'package:iowallet/mainView/home/HomeTabBar.dart';
 
 import 'login/Login.dart';
@@ -14,7 +16,6 @@ class Start extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('IO Media'),
-        automaticallyImplyLeading: false,
       ),
       body: Container(
         color: Colors.white,
@@ -105,12 +106,12 @@ class Start extends StatelessWidget {
               children: [
                 TextButton(
                   child: Text('Điều khoản và chính sách'),
-                  onPressed: () => moveToHome(context),
+                  onPressed: () => moveToPolicy(context),
                 ),
                 Icon(Icons.arrow_upward_sharp),
                 TextButton(
                   child: Text('Hướng dẫn sử dụng'),
-                  onPressed: () => moveToHome(context),
+                  onPressed: () => moveToUserManual(context),
                 ),
               ],
             ),
@@ -133,6 +134,22 @@ class Start extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (context) => Login(),
+        ));
+  }
+
+  moveToPolicy(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Policy(),
+        ));
+  }
+
+  moveToUserManual(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => UserManual(),
         ));
   }
 }

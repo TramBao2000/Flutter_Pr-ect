@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class UserManual extends StatelessWidget {
+class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Hướng dẫn sử dụng'),
+        title: const Text('Quên mật khẩu'),
       ),
       body: Container(
           color: Colors.white,
-          child: Center(child: Text("Hướng dẫn sử dụng"),)
+          child: Center(child: Text("Quên mật khẩu"),)
       ),
     );
   }

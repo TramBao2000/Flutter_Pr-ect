@@ -8,7 +8,6 @@ class InfoPersonal extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Thông tin cá nhân'),
-        automaticallyImplyLeading: false,
       ),
       body: Container(
         color: Colors.white,

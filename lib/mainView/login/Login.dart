@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:iowallet/mainView/common/ForgotPassword.dart';
 import 'package:iowallet/mainView/home/HomeTabBar.dart';
 
 class Login extends StatelessWidget {
@@ -22,7 +23,18 @@ class Login extends StatelessWidget {
               children: [
                 Spacer(),
                 ElevatedButton(
-                  child: Text('Hỗ trợ'),
+                  child: Row(children: [
+                    Icon(Icons.highlight_remove_outlined),
+                    Text("Hỗ trợ")
+                  ],),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    side: BorderSide(width: 3.0, color: Colors.green,),
+                    primary: Colors.white,
+                    onPrimary: Colors.green,
+                  ),
                   onPressed: () => moveToHome(context),
                 ),
               ],
@@ -90,14 +102,14 @@ class Login extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
+                TextButton(
                   child: Text('Quên mật khẩu ?'),
-                  onPressed: () => moveToHome(context),
+                  onPressed: () => moveToForgotPassword(context),
                 ),
                 Spacer(),
-                ElevatedButton(
+                TextButton(
                   child: Text('Đổi SĐT'),
-                  onPressed: () => moveToHome(context),
+                  onPressed: () => goBack(context),
                 ),
               ],
             ),
@@ -120,5 +132,15 @@ class Login extends StatelessWidget {
         MaterialPageRoute(
           builder: (context) => HomeTabBar(),
         ));
+  }
+  moveToForgotPassword(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ForgotPassword(),
+        ));
+  }
+  goBack(BuildContext context) {
+    Navigator.of(context).pop();
   }
 }
