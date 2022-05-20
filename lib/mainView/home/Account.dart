@@ -26,6 +26,7 @@ class Account extends StatelessWidget {
                     top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                 padding: const EdgeInsets.only(
                     top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+                alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -53,11 +54,13 @@ class Account extends StatelessWidget {
                       margin: const EdgeInsets.only(
                           top: 0.0, bottom: 0.0, left: 10.0, right: 10.0),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
                             margin: const EdgeInsets.only(
                                 top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
-                            child: Text("Người dùng 1",
+                            child: Text("NGƯỜI DÙNG 1",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold, // light
                                 )),
@@ -106,51 +109,68 @@ class Account extends StatelessWidget {
                     bottomRight: Radius.circular(8)),
                 border: Border.all(
                   color: Colors.grey, //                   <--- border color
-                  width: 2.0,
+                  width: 1.0,
                 ),
               ),
               child: Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(
-                        top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
-                    child: InkWell(child: Row(
-                      children: [
-                        Icon(
-                          Icons.access_time_outlined,
-                          size: 48.0,
+                      margin: const EdgeInsets.only(
+                          top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
+                      child: InkWell(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.access_time_outlined,
+                              size: 48.0,
+                            ),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              margin: const EdgeInsets.only(
+                                left: 18.0,
+                              ),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(
+                                        top: 8.0,
+                                        bottom: 8.0,
+                                        right: 8.0),
+                                    child: Text(S.of(context).wallet_name,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500, // light
+                                        )),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(
+                                        top: 8.0,
+                                        bottom: 8.0,
+                                        right: 8.0),
+                                    child: Text(S.of(context).wallet_balance,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500, // light
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Spacer(),
+                            Icon(Icons.arrow_forward_ios_rounded),
+                          ],
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: 18.0,
-                          ),
-                          child: Column(
-                            children: [
-                              Text(S.of(context).wallet_name,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w300, // light
-                                    fontStyle: FontStyle.italic, // italic
-                                  )),
-                              Text(S.of(context).wallet_balance,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w300, // light
-                                    fontStyle: FontStyle.italic, // italic
-                                  )),
-                            ],
-                          ),
-                        ),
-                        Spacer(),
-                        Icon(Icons.arrow_forward_ios_rounded),
-                      ],
-                    ),
-                    onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ListTaskWithMoneyBanking(),
-                          ));
-                    },)
-                  ),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ListTaskWithMoneyBanking(),
+                              ));
+                        },
+                      )),
                   Container(
                     margin: const EdgeInsets.only(
                         top: 8.0, bottom: 8.0, left: 0.0, right: 0.0),
@@ -158,36 +178,36 @@ class Account extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   Container(
-                    margin: const EdgeInsets.only(
-                        top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
-                    child: InkWell(child: Row(
-                      children: [
-                        Icon(
-                          Icons.access_time_outlined,
-                          size: 48.0,
+                      margin: const EdgeInsets.only(
+                          top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
+                      child: InkWell(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.access_time_outlined,
+                              size: 48.0,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(
+                                left: 18.0,
+                              ),
+                              child: Text(S.of(context).card_manage,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500, // light
+                                  )),
+                            ),
+                            Spacer(),
+                            Icon(Icons.arrow_forward_ios_rounded),
+                          ],
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: 18.0,
-                          ),
-                          child: Text(S.of(context).card_manage,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w300, // light
-                                fontStyle: FontStyle.italic, // italic
-                              )),
-                        ),
-                        Spacer(),
-                        Icon(Icons.arrow_forward_ios_rounded),
-                      ],
-                    ),
-                    onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PreLinkWithAccountBank(),
-                          ));
-                    },)
-                  ),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PreLinkWithAccountBank(),
+                              ));
+                        },
+                      )),
                   Container(
                     margin: const EdgeInsets.only(
                         top: 8.0, bottom: 8.0, left: 0.0, right: 0.0),
@@ -195,36 +215,36 @@ class Account extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   Container(
-                    margin: const EdgeInsets.only(
-                        top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
-                    child: InkWell(child: Row(
-                      children: [
-                        Icon(
-                          Icons.access_time_outlined,
-                          size: 48.0,
+                      margin: const EdgeInsets.only(
+                          top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
+                      child: InkWell(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.access_time_outlined,
+                              size: 48.0,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(
+                                left: 18.0,
+                              ),
+                              child: Text(S.of(context).payment,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500, // light
+                                  )),
+                            ),
+                            Spacer(),
+                            Icon(Icons.arrow_forward_ios_rounded),
+                          ],
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: 18.0,
-                          ),
-                          child: Text(S.of(context).payment,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w300, // light
-                                fontStyle: FontStyle.italic, // italic
-                              )),
-                        ),
-                        Spacer(),
-                        Icon(Icons.arrow_forward_ios_rounded),
-                      ],
-                    ),
-                    onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ListBillCheckout(),
-                          ));
-                    },)
-                  ),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ListBillCheckout(),
+                              ));
+                        },
+                      )),
                   Container(
                     margin: const EdgeInsets.only(
                         top: 8.0, bottom: 8.0, left: 0.0, right: 0.0),
@@ -247,7 +267,7 @@ class Account extends StatelessWidget {
                     bottomRight: Radius.circular(8)),
                 border: Border.all(
                   color: Colors.grey, //                   <--- border color
-                  width: 2.0,
+                  width: 1.0,
                 ),
               ),
               child: Column(
@@ -267,8 +287,7 @@ class Account extends StatelessWidget {
                           ),
                           child: Text(S.of(context).setup,
                               style: TextStyle(
-                                fontWeight: FontWeight.w300, // light
-                                fontStyle: FontStyle.italic, // italic
+                                fontWeight: FontWeight.w500, // light
                               )),
                         ),
                         Spacer(),
@@ -297,8 +316,7 @@ class Account extends StatelessWidget {
                           ),
                           child: Text(S.of(context).introduce,
                               style: TextStyle(
-                                fontWeight: FontWeight.w300, // light
-                                fontStyle: FontStyle.italic, // italic
+                                fontWeight: FontWeight.w500, // light
                               )),
                         ),
                         Spacer(),
@@ -327,8 +345,7 @@ class Account extends StatelessWidget {
                           ),
                           child: Text(S.of(context).sign_out,
                               style: TextStyle(
-                                fontWeight: FontWeight.w300, // light
-                                fontStyle: FontStyle.italic, // italic
+                                fontWeight: FontWeight.w500, // light// italic
                               )),
                         ),
                         Spacer(),
@@ -361,4 +378,3 @@ class Account extends StatelessWidget {
     Navigator.of(context).pop();
   }
 }
-

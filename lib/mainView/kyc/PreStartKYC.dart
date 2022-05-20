@@ -14,7 +14,8 @@ class PreStartKYC extends StatelessWidget {
         color: Colors.white,
         child: Column(children: [
           Container(
-            margin: const EdgeInsets.only(top: 10.0),
+            alignment: Alignment.topCenter,
+            margin: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
             child:  Text("Quý khách vui lòng xác thực tài khoản để có thể sử dụng các dịch vụ do Ví điện tử IO cung cấp"),
           ),
           Container(

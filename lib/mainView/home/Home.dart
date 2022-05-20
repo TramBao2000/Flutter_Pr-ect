@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:badges/badges.dart';
 import 'package:iowallet/mainView/noticeboard/NoticeBoard.dart';
 
 class Home extends StatelessWidget {
@@ -17,24 +18,24 @@ class Home extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       body: SingleChildScrollView(
-     //   color: Colors.white,
+        //   color: Colors.white,
         child: Column(children: [
           Row(
             children: [
               Image(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width * 0.15,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .width * 0.1,
+                  width: MediaQuery.of(context).size.width * 0.15,
+                  height: MediaQuery.of(context).size.width * 0.1,
                   image: AssetImage('assets/photos/pic1.png')),
               Spacer(),
               InkWell(
-                child:               Icon(Icons.add_alert),
-                onTap: (){
+                child: Badge(
+                  badgeContent: Text('1',
+                  style: TextStyle(
+                    color: Colors.white
+                  ),),
+                  child: Icon(Icons.add_alert),
+                ),
+                onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -42,7 +43,6 @@ class Home extends StatelessWidget {
                       ));
                 },
               ),
-
               Container(
                 margin: const EdgeInsets.only(top: 10.0),
                 child: Column(
@@ -51,7 +51,6 @@ class Home extends StatelessWidget {
               ),
             ],
           ),
-
           Container(
             child: Column(
               children: [
@@ -60,14 +59,14 @@ class Home extends StatelessWidget {
                   child: GFCarousel(
                     autoPlay: true,
                     enableInfiniteScroll: true,
-                //    pagerSize: 100,
+                    //    pagerSize: 100,
                     items: imageList.map(
-                          (url) {
+                      (url) {
                         return Container(
                           margin: EdgeInsets.all(0.0),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(0.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(0.0)),
                             child: Image.network(url,
                                 fit: BoxFit.cover, width: 1000.0),
                           ),
@@ -99,28 +98,33 @@ class Home extends StatelessWidget {
                         width: 2.0,
                       ),
                     ),
-                    child: Column(children: [
-                      Row(
-                        children: [
-                          Text("Số dư Ví (VND):",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),),
-                          Text("123456",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blue, // light
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Số dư Ví (VND):",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                            top: 8.0, bottom: 8.0, left: 0.0, right: 0.0),
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                    ],)),
+                            Text(
+                              "123456",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue, // light
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: 8.0, bottom: 8.0, left: 0.0, right: 0.0),
+                          height: 1,
+                          color: Colors.grey,
+                        ),
+                      ],
+                    )),
                 Container(
                     margin: const EdgeInsets.only(
                         top: 0.0, bottom: 10.0, left: 10.0, right: 10.0),

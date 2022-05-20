@@ -47,11 +47,13 @@ class InfoPersonal extends StatelessWidget {
                     margin: const EdgeInsets.only(
                         top: 0.0, bottom: 0.0, left: 10.0, right: 10.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           margin: const EdgeInsets.only(
                               top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
-                          child: Text("Người dùng 1",
+                          child: Text("NGƯỜI DÙNG 1",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold, // light
                               )),

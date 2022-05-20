@@ -61,8 +61,7 @@ class ListTaskWithMoneyBanking extends StatelessWidget {
                       bottomRight: Radius.circular(8)),
                   border: Border.all(
                     color: Colors.grey,
-                    //                   <--- border color
-                    width: 2.0,
+                    width: 1.0,
                   ),
                 ),
                 child: Column(
@@ -82,8 +81,7 @@ class ListTaskWithMoneyBanking extends StatelessWidget {
                             ),
                             child: Text("Nạp tiền",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w300, // light
-                                  fontStyle: FontStyle.italic, // italic
+                                  fontWeight: FontWeight.w500, // light
                                 )),
                           ),
                           Spacer(),
@@ -111,8 +109,7 @@ class ListTaskWithMoneyBanking extends StatelessWidget {
                             ),
                             child: Text("Rút tiền",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w300, // light
-                                  fontStyle: FontStyle.italic, // italic
+                                  fontWeight: FontWeight.w500,
                                 )),
                           ),
                           Spacer(),
@@ -140,8 +137,7 @@ class ListTaskWithMoneyBanking extends StatelessWidget {
                             ),
                             child: Text("Chuyển tiền",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w300, // light
-                                  fontStyle: FontStyle.italic, // italic
+                                  fontWeight: FontWeight.w500, // italic
                                 )),
                           ),
                           Spacer(),
