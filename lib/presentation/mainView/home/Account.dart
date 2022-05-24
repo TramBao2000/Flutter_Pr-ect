@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:iowallet/mainView/account/InfoPersonal.dart';
-import 'package:iowallet/mainView/account/ListBillCheckout.dart';
-import 'package:iowallet/mainView/banking/ListTaskWithMoneyBanking.dart';
-import 'package:iowallet/mainView/banking/PreLinkWithAccountBank.dart';
-import 'package:iowallet/mainView/kyc/PreStartKYC.dart';
+import 'package:iowallet/presentation/mainView/account/InfoPersonal.dart';
+import 'package:iowallet/presentation/mainView/account/ListBillCheckout.dart';
+import 'package:iowallet/presentation/mainView/banking/ListAccountBank.dart';
+import 'package:iowallet/presentation/mainView/banking/ListTaskWithMoneyBanking.dart';
 
-import '../../generated/l10n.dart';
+import '../../../generated/l10n.dart';
 
 class Account extends StatelessWidget {
   @override
@@ -204,7 +203,7 @@ class Account extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PreLinkWithAccountBank(),
+                                builder: (context) => ListAccountBank(),
                               ));
                         },
                       )),

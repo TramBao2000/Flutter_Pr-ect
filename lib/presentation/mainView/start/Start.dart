@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:iowallet/mainView/common/Policy.dart';
-import 'package:iowallet/mainView/common/UserManual.dart';
-import 'package:iowallet/mainView/home/HomeTabBar.dart';
-
-import 'login/Login.dart';
+import 'package:iowallet/presentation/mainView/common/Policy.dart';
+import 'package:iowallet/presentation/mainView/common/UserManual.dart';
+import 'package:iowallet/presentation/mainView/home/HomeTabBar.dart';
+import '../login/Login.dart';
 
 class Start extends StatelessWidget {
   var _controller = TextEditingController();
+  @override
 
   @override
   Widget build(BuildContext context) {

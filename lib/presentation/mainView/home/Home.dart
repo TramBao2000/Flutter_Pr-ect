@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:badges/badges.dart';
-import 'package:iowallet/mainView/noticeboard/NoticeBoard.dart';
+import 'package:iowallet/presentation/mainView/noticeboard/NoticeBoard.dart';
 
 class Home extends StatelessWidget {
   final List<String> imageList = [

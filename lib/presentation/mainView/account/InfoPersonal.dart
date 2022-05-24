@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iowallet/generated/l10n.dart';
-import 'package:iowallet/mainView/common/OTPVerify.dart';
-import 'package:iowallet/mainView/kyc/PreStartKYC.dart';
+import 'package:iowallet/presentation/mainView/kyc/PreStartKYC.dart';
 
 class InfoPersonal extends StatelessWidget {
   @override

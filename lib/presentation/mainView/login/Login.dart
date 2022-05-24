@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:iowallet/mainView/common/ForgotPassword.dart';
-import 'package:iowallet/mainView/home/HomeTabBar.dart';
+import 'package:iowallet/presentation/mainView/common/ForgotPassword.dart';
+import 'package:iowallet/presentation/mainView/home/HomeTabBar.dart';
 
 class Login extends StatelessWidget {
   var _controller = TextEditingController();
