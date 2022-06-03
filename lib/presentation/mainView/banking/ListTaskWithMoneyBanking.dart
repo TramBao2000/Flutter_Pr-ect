@@ -15,7 +15,7 @@ class ListTaskWithMoneyBanking extends StatelessWidget {
             Container(
                 width: double.maxFinite,
                 margin: const EdgeInsets.only(
-                    top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+                    top: 7.0, bottom: 7.0, left: 7.0, right: 7.0),
                 padding: const EdgeInsets.only(
                     top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                 decoration: BoxDecoration(
@@ -49,7 +49,7 @@ class ListTaskWithMoneyBanking extends StatelessWidget {
                 )),
             Container(
                 margin: const EdgeInsets.only(
-                    top: 0.0, bottom: 10.0, left: 10.0, right: 10.0),
+                    top: 0.0, bottom: 7.0, left: 7.0, right: 7.0),
                 padding: const EdgeInsets.only(
                     top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                 decoration: BoxDecoration(
@@ -60,7 +60,7 @@ class ListTaskWithMoneyBanking extends StatelessWidget {
                       bottomLeft: Radius.circular(8),
                       bottomRight: Radius.circular(8)),
                   border: Border.all(
-                    color: Colors.grey,
+                    color: Colors.grey.shade300,
                     width: 1.0,
                   ),
                 ),
@@ -72,8 +72,9 @@ class ListTaskWithMoneyBanking extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(
-                            Icons.access_time_outlined,
+                            Icons.credit_card_outlined,
                             size: 48.0,
+                            color: Colors.red,
                           ),
                           Container(
                             margin: const EdgeInsets.only(
@@ -92,7 +93,7 @@ class ListTaskWithMoneyBanking extends StatelessWidget {
                       margin: const EdgeInsets.only(
                           top: 8.0, bottom: 8.0, left: 0.0, right: 0.0),
                       height: 1,
-                      color: Colors.grey,
+                      color: Colors.grey.shade100,
                     ),
                     Container(
                       margin: const EdgeInsets.only(
@@ -100,8 +101,9 @@ class ListTaskWithMoneyBanking extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(
-                            Icons.access_time_outlined,
+                            Icons.credit_card_outlined,
                             size: 48.0,
+                            color: Colors.red,
                           ),
                           Container(
                             margin: const EdgeInsets.only(
@@ -120,7 +122,7 @@ class ListTaskWithMoneyBanking extends StatelessWidget {
                       margin: const EdgeInsets.only(
                           top: 8.0, bottom: 8.0, left: 0.0, right: 0.0),
                       height: 1,
-                      color: Colors.grey,
+                      color: Colors.grey.shade100,
                     ),
                     Container(
                       margin: const EdgeInsets.only(
@@ -128,8 +130,9 @@ class ListTaskWithMoneyBanking extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(
-                            Icons.access_time_outlined,
+                            Icons.credit_card_outlined,
                             size: 48.0,
+                            color: Colors.red,
                           ),
                           Container(
                             margin: const EdgeInsets.only(

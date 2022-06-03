@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:iowallet/presentation/mainView/common/OTPVerify.dart';
 import 'package:iowallet/presentation/mainView/common/Policy.dart';
 import 'package:iowallet/presentation/mainView/common/UserManual.dart';
+import 'package:iowallet/presentation/mainView/kyc/PreStartKYC.dart';
+import 'package:iowallet/presentation/mainView/register/CreatePassword.dart';
+import 'package:iowallet/presentation/mainView/register/RegisterCompleted.dart';
 
 import '../../generated/l10n.dart';
 import 'AppBloc.dart';
@@ -58,7 +62,10 @@ class AppView extends StatelessWidget {
         '/login': (context) => Login(),
         '/policy': (context) => Policy(),
         '/usermanual': (context) => UserManual(),
-
+        '/createpassword': (context) => CreatePassword(),
+        '/otpverify': (context) => OTPVerify(),
+        '/registercompleted': (context) => RegisterCompleted(),
+        '/prestartkyc': (context) => PreStartKYC(),
       },
       initialRoute: '/splash',
     );

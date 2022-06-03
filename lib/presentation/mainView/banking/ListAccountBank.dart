@@ -28,7 +28,7 @@ class ListAccountBank extends StatelessWidget {
                       bottomLeft: Radius.circular(8),
                       bottomRight: Radius.circular(8)),
                   border: Border.all(
-                    color: Colors.grey, //                   <--- border color
+                    color: Colors.grey.shade300, //                   <--- border color
                     width: 1.0,
                   ),
                 ),
@@ -90,36 +90,35 @@ class ListAccountBank extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  child:
-                    Container(
-                      margin: const EdgeInsets.only(
-                          top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(18),
-                            topRight: Radius.circular(18),
-                            bottomLeft: Radius.circular(18),
-                            bottomRight: Radius.circular(18)),
-                        border: Border.all(
-                          color: Colors.grey,
-                          //                   <--- border color
-                          width: 1.0,
-                        ),
-                      ),
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                            top: 8.0, bottom: 8.0, right: 8.0),
-                        child: Text(
-                            "Quý khách chưa thực hiện liên kết thẻ/tài khoản ngân hàng",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.blue // light
-                            )),
+                  child: SizedBox(
+                    child: Container(
+                    margin: const EdgeInsets.only(
+                        top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(18),
+                          topRight: Radius.circular(18),
+                          bottomLeft: Radius.circular(18),
+                          bottomRight: Radius.circular(18)),
+                      border: Border.all(
+                        color: Colors.grey.shade300,
+                        //                   <--- border color
+                        width: 1.0,
                       ),
                     ),
-
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                          top: 8.0, bottom: 8.0, right: 8.0),
+                      child: Text(
+                          "Quý khách chưa thực hiện liên kết thẻ/tài khoản ngân hàng",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.blue // light
+                          )),
+                    ),
+                  ),),
                 ),
               ),
             ],

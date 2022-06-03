@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../customWidgets/FeatureWidget.dart';
+
 class ListBillCheckout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -21,69 +23,16 @@ class ListBillCheckout extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(
-                        top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                    padding: const EdgeInsets.only(
-                        top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          topRight: Radius.circular(8),
-                          bottomLeft: Radius.circular(8),
-                          bottomRight: Radius.circular(8)),
-                      border: Border.all(
-                        color:
-                            Colors.grey, //                   <--- border color
-                        width: 1.0,
-                      ),
-                    ),
-                    child: Column(
-                      children: [Icon(Icons.ac_unit_outlined), Text("Điện")],
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                        top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                    padding: const EdgeInsets.only(
-                        top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          topRight: Radius.circular(8),
-                          bottomLeft: Radius.circular(8),
-                          bottomRight: Radius.circular(8)),
-                      border: Border.all(
-                        color:
-                            Colors.grey, //                   <--- border color
-                        width: 1.0,
-                      ),
-                    ),
-                    child: Column(
-                      children: [Icon(Icons.ac_unit_outlined), Text("Nước")],
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                        top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                    padding: const EdgeInsets.only(
-                        top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          topRight: Radius.circular(8),
-                          bottomLeft: Radius.circular(8),
-                          bottomRight: Radius.circular(8)),
-                      border: Border.all(
-                        color:
-                            Colors.grey, //                   <--- border color
-                        width: 1.0,
-                      ),
-                    ),
-                    child: Column(
-                      children: [Icon(Icons.ac_unit_outlined), Text("Điện thoại cố định")],
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                          children: List<Widget>.generate(4, (index) {
+                            return Container(
+                              width: 80,
+                              height: 100,
+                              child: FeatureWidget(),
+                            );
+                          })),
                     ),
                   ),
                 ],

@@ -9,16 +9,61 @@ import 'dart:typed_data';
 
 class RSA {
   String rsaEncrypt(RSAPublicKey myPublic, String dataToEncrypt) {
-    final encryptor = OAEPEncoding(RSAEngine())
-      ..init(true, PublicKeyParameter<RSAPublicKey>(myPublic)); // true=encrypt
+    AsymmetricBlockCipher encryptor = RSAEngine()..init(true, PublicKeyParameter<RSAPublicKey>(myPublic)); // true=encrypt
     return base64Encode(_processInBlocks(encryptor, Uint8List.fromList(dataToEncrypt.codeUnits)));
   }
+  // String rsaEncrypt(RSAPublicKey myPublic, String dataToEncrypt) {
+  //
+  //   final encryptor = OAEPEncoding(RSAEngine())
+  //     ..init(true, PublicKeyParameter<RSAPublicKey>(myPublic));
+  //
+  //   int keySize = (myPublic.modulus!.bitLength / 8).toInt();
+  //   int maxLength = keySize - 42;
+  //   List<int> bytes = utf8.encode(dataToEncrypt);
+  //   int datalength = bytes.length;
+  //   int iterations = (datalength / maxLength).toInt();
+  //   Uint8List result;
+  //   // result.
+  //   //
+  //   // for(int i = 0; i < iterations; i++){
+  //   //   var tempBytes = <int>[];
+  //   //   sb..base64Encode(_processInBlocks(encryptor, Uint8List.fromList(dataToEncrypt.codeUnits)));
+  //   // }
+  //   //
+  //   // sb.toString();
+  //   // true=encrypt
+  //   return "d" ;
+  // }
+  // String encrypt(String text, RSAPublicKey pubKey) {
+  //   var cipher = PKCS1Encoding(RSAEngine());
+  //   cipher.init(true, PublicKeyParameter<RSAPublicKey>(pubKey));
+  //   Uint8List output1 = cipher.process(utf8.encode(text));
+  //   return  base64Encode(output1);
+  // }
+  //
+  // String decrypt(String input, RSAPrivateKey privateKey) {
+  //   var cipher = PKCS1Encoding(RSAEngine());
+  //   cipher.init(false, PrivateKeyParameter<RSAPrivateKey>(privateKey));
+  //   Uint8List output = cipher.process(base64Decode(input));
+  //   return utf8.decode(output);
+  // }
+  String rsaDecrypt(RSAPrivateKey myPrivate, String data) {
 
-  String rsaDecrypt(RSAPrivateKey myPrivate, String cipherText) {
-    final decryptor = OAEPEncoding(RSAEngine())
-      ..init(false, PrivateKeyParameter<RSAPrivateKey>(myPrivate)); // false=decrypt
+    int dwKeySize = myPrivate.modulus!.bitLength;
 
-    return base64Encode(_processInBlocks(decryptor, Uint8List.fromList(cipherText.codeUnits)));
+    int base64BlockSize = (dwKeySize / 8 % 3) != 0 ? (dwKeySize / 8 / 3 * 4 + 4).toInt() : (dwKeySize / 8 / 3 * 4).toInt();
+
+    int iterations = (data.length / base64BlockSize).toInt();
+
+    for(int i = 0; i < iterations; i++){
+      String sTemp = data.substring(base64BlockSize * i, base64BlockSize * i + base64BlockSize);
+
+    }
+    AsymmetricBlockCipher decryptor = RSAEngine()..init(
+      false,
+      PrivateKeyParameter<RSAPrivateKey>(myPrivate),
+    );
+    return base64Encode(_processInBlocks(decryptor, Uint8List.fromList(data.codeUnits)));
   }
 
   Uint8List _processInBlocks(AsymmetricBlockCipher engine, Uint8List input) {

@@ -1,12 +1,10 @@
-import 'dart:typed_data';
-
-class KeyChange {
+class KeyChangeRequest {
   String? appVersion;
   String? deviceId;
   String? clientKey;
   String? sign;
 
-  KeyChange(
+  KeyChangeRequest(
       String? appVersion, String? deviceId, String? clientKey, String? sign) {
     this.appVersion = appVersion;
     this.deviceId = deviceId;

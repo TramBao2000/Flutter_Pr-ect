@@ -24,7 +24,7 @@ class Login extends StatelessWidget {
                 Spacer(),
                 ElevatedButton(
                   child: Row(children: [
-                    Icon(Icons.highlight_remove_outlined),
+                    Icon(Icons.announcement),
                     Text("Hỗ trợ")
                   ],),
                   style: ElevatedButton.styleFrom(
