@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:iowallet/presentation/mainView/common/QrCodeScanner.dart';
 
+import '../../customWidgets/DialogUtils.dart';
 import 'Account.dart';
 import 'History.dart';
 import 'Home.dart';
@@ -45,53 +49,76 @@ class _TabBarExerciseWidgetState extends State<TabBarExerciseWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
+    return WillPopScope(
+      onWillPop: () async {
+        showAlertDialog();
+        return Future(() => false);
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: _widgetOptions.elementAt(_selectedIndex),
+          ),
+        ),
+        floatingActionButtonLocation:
+        FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: SizedBox(
+          width: 60.0,
+          height: 60.0,
+          child: FloatingActionButton(
+              backgroundColor: Colors.black12,
+              child: Icon(Icons.qr_code_scanner, size: 40,),
+              onPressed: () {
+                _onItemTapped(2);
+              }),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Trang Chủ',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'Lịch Sử GD',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.map,
+                size: 0,
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.redeem),
+              label: 'Ưu đãi',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_outlined),
+              label: 'Tài Khoản',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.blue,
+          onTap: _onItemTapped,
         ),
       ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: SizedBox(
-        width: 60.0,
-        height: 60.0,
-        child: FloatingActionButton(
-            backgroundColor: Colors.black12,
-            child: Icon(Icons.qr_code_scanner, size: 40,),
-            onPressed: () {}),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Trang Chủ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Lịch Sử GD',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.map,
-              size: 0,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.assignment_rounded),
-            label: 'Ưu đãi',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.assignment_rounded),
-            label: 'Tài Khoản',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-      ),
     );
+  }
+
+  void showAlertDialog() async {
+    var result = await DialogUtils.displayDialogOKCallBack(
+        context,
+        "Thông báo",
+        "Xác nhận bạn muốn thoát ứng dụng",
+        "Xác nhận");
+    if (result!) {
+      if (Platform.isAndroid) {
+        SystemNavigator.pop();
+      } else if (Platform.isIOS) {
+        exit(0);
+      }
+    }
   }
 }

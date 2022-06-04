@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:iowallet/presentation/mainView/common/OTPVerify.dart';
 import 'package:iowallet/presentation/mainView/common/Policy.dart';
 import 'package:iowallet/presentation/mainView/common/UserManual.dart';
+import 'package:iowallet/presentation/mainView/home/HomeTabBar.dart';
 import 'package:iowallet/presentation/mainView/kyc/PreStartKYC.dart';
 import 'package:iowallet/presentation/mainView/register/CreatePassword.dart';
 import 'package:iowallet/presentation/mainView/register/RegisterCompleted.dart';
@@ -66,6 +67,7 @@ class AppView extends StatelessWidget {
         '/otpverify': (context) => OTPVerify(),
         '/registercompleted': (context) => RegisterCompleted(),
         '/prestartkyc': (context) => PreStartKYC(),
+        '/tabbarhome': (context) => HomeTabBar(),
       },
       initialRoute: '/splash',
     );

@@ -183,20 +183,4 @@ class _RegisterState extends State<Register> {
           ),
         ));
   }
-
-  moveToHome(BuildContext context) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => HomeTabBar(),
-    //     ));
-  }
-
-  moveToLogin(BuildContext context) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => Login(),
-    //     ));
-  }
 }

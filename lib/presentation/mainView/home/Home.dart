@@ -1,11 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:badges/badges.dart';
 import 'package:iowallet/presentation/customWidgets/FeatureWidget.dart';
 import 'package:iowallet/presentation/mainView/noticeboard/NoticeBoard.dart';
 
-import '../../customWidgets/CustomDialog.dart';
+import '../../customWidgets/DialogUtils.dart';
 
 class Home extends StatelessWidget {
   final List<String> imageList = [
@@ -53,14 +56,6 @@ class Home extends StatelessWidget {
                         child: Icon(Icons.add_alert),
                       ),
                       onTap: () {
-                        // showDialog(context: context,
-                        //     builder: (BuildContext context){
-                        //       return CustomDialogBox(
-                        //         title: "Thông báo",
-                        //         descriptions: "Số CMND/CCCD/Hộ chiếu đã được sử dụng. Quý khách vui lòng kiểm tra lại",
-                        //         text: "Đóng");
-                        //     }
-                        // );
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -149,7 +144,7 @@ class Home extends StatelessWidget {
                   Container(
                       margin: const EdgeInsets.only(
                           top: 5.0, bottom: 0.0, left: 0.0, right: 0.0),
-                      padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      padding: const EdgeInsets.only(top: 10.0),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -160,7 +155,7 @@ class Home extends StatelessWidget {
                         border: Border.all(
                           color: Colors.grey.shade300,
                           //                   <--- border color
-                          width: 2.0,
+                          width: 1.0,
                         ),
                       ),
                       child: Column(
@@ -180,7 +175,10 @@ class Home extends StatelessWidget {
                                   color: Colors.blue, // light
                                 ),
                               ),
-                              Icon(Icons.visibility_off,size: 18,)
+                              Icon(
+                                Icons.visibility_off,
+                                size: 18,
+                              )
                             ],
                           ),
                           Container(
@@ -197,7 +195,7 @@ class Home extends StatelessWidget {
                                 return Container(
                                   width: 80,
                                   height: 120,
-                                  child: FeatureWidget(),
+                                  child: FeatureWidget(featureName: 'Chức năng', featureImageAsset: 'assets/photos/pic1.png',),
                                 );
                               })),
                             ),
@@ -208,7 +206,9 @@ class Home extends StatelessWidget {
                       margin: const EdgeInsets.only(
                           top: 5.0, bottom: 0.0, left: 0.0, right: 0.0),
                       padding: const EdgeInsets.only(
-                          top: 10.0, bottom: 10.0,),
+                        top: 10.0,
+                        bottom: 10.0,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -219,7 +219,7 @@ class Home extends StatelessWidget {
                         border: Border.all(
                           color: Colors.grey.shade300,
                           //                   <--- border color
-                          width: 2.0,
+                          width: 1.0,
                         ),
                       ),
                       child: Column(
@@ -232,7 +232,7 @@ class Home extends StatelessWidget {
                                 return Container(
                                   width: 80,
                                   height: 100,
-                                  child: FeatureWidget(),
+                                  child: FeatureWidget(featureName: 'Chức năng', featureImageAsset: 'assets/photos/pic1.png',),
                                 );
                               })),
                             ),
@@ -251,7 +251,7 @@ class Home extends StatelessWidget {
                                 return Container(
                                   width: 80,
                                   height: 100,
-                                  child: FeatureWidget(),
+                                  child: FeatureWidget(featureName: 'Chức năng', featureImageAsset: 'assets/photos/pic1.png',),
                                 );
                               })),
                             ),
@@ -270,137 +270,10 @@ class Home extends StatelessWidget {
                                 return Container(
                                   width: 80,
                                   height: 100,
-                                  child: FeatureWidget(),
+                                  child: FeatureWidget(featureName: 'Chức năng', featureImageAsset: 'assets/photos/pic1.png',),
                                 );
                               })),
                             ),
-                          ),
-                        ],
-                      )),
-                  Container(
-                      margin: const EdgeInsets.only(
-                          top: 5.0, bottom: 0.0, left: 0.0, right: 0.0),
-                      padding: const EdgeInsets.only(
-                          top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(6),
-                            topRight: Radius.circular(6),
-                            bottomLeft: Radius.circular(6),
-                            bottomRight: Radius.circular(6)),
-                        border: Border.all(
-                          color: Colors.grey.shade300,
-                          //                   <--- border color
-                          width: 2.0,
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(
-                                top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.access_time_outlined,
-                                  size: 48.0,
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                    left: 18.0,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Text("Ví IO",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            // light
-                                            fontStyle:
-                                                FontStyle.italic, // italic
-                                          )),
-                                      Text("Số dư ví (VND)",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            // light
-                                            fontStyle:
-                                                FontStyle.italic, // italic
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                                Spacer(),
-                                Icon(Icons.arrow_forward_ios_rounded),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(
-                                top: 8.0, bottom: 8.0, left: 0.0, right: 0.0),
-                            height: 1,
-                            color: Colors.grey,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(
-                                top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.access_time_outlined,
-                                  size: 48.0,
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                    left: 18.0,
-                                  ),
-                                  child: Text("Quản lý thẻ/Tài khoản",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w300,
-                                        // light
-                                        fontStyle: FontStyle.italic, // italic
-                                      )),
-                                ),
-                                Spacer(),
-                                Icon(Icons.arrow_forward_ios_rounded),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(
-                                top: 8.0, bottom: 8.0, left: 0.0, right: 0.0),
-                            height: 1,
-                            color: Colors.grey,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(
-                                top: 8.0, bottom: 8.0, left: 8.0, right: 8.0),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.access_time_outlined,
-                                  size: 48.0,
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                    left: 18.0,
-                                  ),
-                                  child: Text("Thanh toán",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w300,
-                                        // light
-                                        fontStyle: FontStyle.italic, // italic
-                                      )),
-                                ),
-                                Spacer(),
-                                Icon(Icons.arrow_forward_ios_rounded),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(
-                                top: 8.0, bottom: 8.0, left: 0.0, right: 0.0),
-                            height: 1,
-                            color: Colors.grey,
                           ),
                         ],
                       )),
@@ -411,17 +284,5 @@ class Home extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  moveToExercise(BuildContext context) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => IndexPage(),
-    //     ));
-  }
-
-  moveToHome(BuildContext context) {
-    Navigator.of(context).pop();
   }
 }

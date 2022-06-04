@@ -9,6 +9,8 @@ class EventRegister extends AppEvent {}
 class EventCreatePassword extends AppEvent {}
 class EventOTPVerify extends AppEvent {}
 class EventRegisterCompleted extends AppEvent {}
+class EventHomeTabBar extends AppEvent {}
+class EventPreStartKYC extends AppEvent {}
 
 
 class EventPolicy extends AppEvent {}

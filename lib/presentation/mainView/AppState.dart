@@ -13,3 +13,6 @@ class StateRegisterCompleted extends AppState {}
 
 class StatePolicy extends AppState {}
 class StateUserManual extends AppState {}
+class StatePreStartKYC extends AppState {}
+class StateHomeTabBar extends AppState {}
+

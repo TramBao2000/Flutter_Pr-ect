@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iowallet/presentation/mainView/AppEvents.dart';
 
 import '../AppBloc.dart';
 import '../AppState.dart';
@@ -13,8 +14,11 @@ class RegisterCompleted extends StatelessWidget {
     // TODO: implement build
     return BlocListener<AppBloc, AppState>(
         listener: (context, state) {
-          if (state is StateCreatePassword) {
-            Navigator.of(context).pushNamed('/createpassword');
+          if (state is StatePreStartKYC) {
+            Navigator.of(context).pushNamed('/prestartkyc');
+          }
+          if (state is StateHomeTabBar) {
+            Navigator.of(context).pushNamed('/tabbarhome');
           }
         },
         child: Scaffold(
@@ -86,7 +90,9 @@ class RegisterCompleted extends StatelessWidget {
                   )),
               ElevatedButton(
                 child: Text('Xác thực tài khoản'),
-                onPressed: () => moveToHome(context),
+                onPressed: (){
+                  context.read<AppBloc>().add(EventPreStartKYC());
+                }
               ),
               Container(
                 margin: const EdgeInsets.only(
@@ -106,26 +112,12 @@ class RegisterCompleted extends StatelessWidget {
                 ),),
               ElevatedButton(
                 child: Text('Thực hiện sau'),
-                onPressed: () => moveToHome(context),
+                onPressed: () {
+                  context.read<AppBloc>().add(EventHomeTabBar());
+                }
               ),
             ]),
           ),
         ));
-  }
-
-  moveToHome(BuildContext context) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => HomeTabBar(),
-    //     ));
-  }
-
-  moveToLogin(BuildContext context) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => Login(),
-    //     ));
   }
 }

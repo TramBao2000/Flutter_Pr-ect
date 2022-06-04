@@ -14,5 +14,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<EventCreatePassword>((event, emit) => emit(StateCreatePassword()));
     on<EventOTPVerify>((event, emit) => emit(StateOTPVerify()));
     on<EventRegisterCompleted>((event, emit) => emit(StateRegisterCompleted()));
+    on<EventPreStartKYC>((event, emit) => emit(StatePreStartKYC()));
+    on<EventHomeTabBar>((event, emit) => emit(StateHomeTabBar()));
   }
 }

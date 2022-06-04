@@ -9,14 +9,4 @@ class History extends StatelessWidget {
         child: Center(child: Text("Lịch sử giao dịch"),)
     );
   }
-  moveToExercise(BuildContext context) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => IndexPage(),
-    //     ));
-  }
-  moveToHome(BuildContext context) {
-    Navigator.of(context).pop();
-  }
 }

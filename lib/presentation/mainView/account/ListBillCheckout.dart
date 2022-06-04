@@ -30,7 +30,7 @@ class ListBillCheckout extends StatelessWidget {
                             return Container(
                               width: 80,
                               height: 100,
-                              child: FeatureWidget(),
+                              child: FeatureWidget(featureName: 'Chức năng', featureImageAsset: 'assets/photos/pic1.png',),
                             );
                           })),
                     ),
