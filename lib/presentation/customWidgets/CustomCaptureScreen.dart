@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iowallet/presentation/mainView/kyc/BacksideCaptureScreen.dart';
 import 'package:iowallet/presentation/mainView/kyc/FrontCameraOCR.dart';
 import 'package:camera/camera.dart';
-import 'package:custom_switch/custom_switch.dart';
 import 'package:iowallet/presentation/mainView/kyc/FrontCaptureScreen.dart';
 
 
@@ -173,7 +172,7 @@ class _CaptureWidgetState extends State<CaptureWidget> {
                         ),
                       ),
                     ),
-                    CustomSwitch(
+                    Switch(
                       activeColor: Color(0xFF50F76B),
                       value: status,
                       onChanged: (value) {

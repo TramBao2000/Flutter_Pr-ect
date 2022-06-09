@@ -3,8 +3,10 @@ import 'dart:isolate';
 
 import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/foundation.dart';
-
-//import 'package:encrypt/encrypt.dart';
+import 'package:iowallet/common/security/RSACrypto.dart';
+import 'package:iowallet/model/request_and_reponse/KeyChange.dart';
+import 'package:pointycastle/asymmetric/api.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,13 +15,11 @@ import 'package:iowallet/common/network/RequestAPI.dart';
 import 'package:iowallet/presentation/mainView/start/CheckExistUser.dart';
 import 'package:pointycastle/digests/sha256.dart';
 import 'package:pointycastle/signers/rsa_signer.dart';
-//import 'package:pointycastle/pointycastle.dart';
 
 import '../../../common/device/DeviceUtil.dart';
-import '../../../common/security/RSA.dart';
+import '../../../common/security/encrypt.dart';
 import '../../../common/utils/AppConstant.dart';
 import '../../../common/utils/SharedPreferencesHelper.dart';
-import '../../../model/request_and_reponse/KeyChange.dart';
 import '../AppBloc.dart';
 import '../AppEvents.dart';
 import '../AppState.dart';
@@ -35,62 +35,32 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   Isolate.spawn(loadAppData(), null);
-    // });
-    // compute(loadAppData(),null);
-    // SchedulerBinding.instance.addPostFrameCallback((_) {
-    //   loadAppData();
-    // });
-    loadAppData();
+    WidgetsBinding.instance.addPostFrameCallback((_) => loadServerKey());
   }
 
-  // Future<void> fetchPhotos(Client client) async {
-  //   ReceivePort port = ReceivePort();
-  //   final response = await client
-  //       .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
-  //   final isolate = await Isolate.spawn(
-  //       loadAppData(), [port.sendPort, response.body]);
-  //   List<Photo> data = await port.first;
-  //   isolate.kill(priority: Isolate.immediate);
-  // }
+  // Future<void> loadStateApp() async {
+  //   final receivePort = ReceivePort();
   //
-  // void parsePhotos(List<dynamic> param) {
-  //   SendPort sendPort = values[0];
-  //   final parsed = jsonDecode(param[1]).cast<Map<String, dynamic>>();
-  //   sendPort.send(parsed.map<Photo>((json) => Photo.fromJson(json)).toList());
+  //   final isolate = await Isolate.spawn(
+  //     loadServerKey,
+  //     [receivePort.sendPort, 3],
+  //   );
+  //
+  //   receivePort.listen((message) {
+  //     setState(() {
+  //       context.read<AppBloc>().add(EventCheckExistUser());
+  //       //     loadDone = true;
+  //     });
+  //     receivePort.close();
+  //     isolate.kill();
+  //   });
   // }
 
-  Future<void> loadAppData() async {
+  Future<void> loadServerKey() async {
+    // final pair = generateRSAkeyPair(exampleSecureRandom());
+
     AppConstant.appVer = await DeviceUtil().getAppVersion();
     AppConstant.deviceID = await DeviceUtil().getDeviceID();
-    if (await loadKeys()) {
-      AppConstant.rsa.genPairKey();
-
-      String? myPublicKey =
-          CryptoUtils.encodeRSAPublicKeyToPem(AppConstant.myPublicKey!);
-      String? myPrivateKey =
-          CryptoUtils.encodeRSAPrivateKeyToPem(AppConstant.myPrivateKey!);
-      var dataSign = AppConstant.appVer! + AppConstant.deviceID! + myPublicKey;
-      String sign = RSA().sign(dataSign, AppConstant.myPrivateKey!);
-
-      String? a = await RequestAPI().requestPost(
-          "http://115.84.183.19:9090/EWalletApi/services/auth/key-exchange",
-          jsonEncode(KeyChangeRequest(
-              AppConstant.appVer, AppConstant.deviceID, myPublicKey, sign)));
-      KeyChangeResponse response = KeyChangeResponse.fromJson(jsonDecode(a!));
-      SharedPreferencesHelper()
-          .setString("serverPublicKey", response.serverKey!);
-      AppConstant.serverPublicKey =
-          CryptoUtils.rsaPublicKeyFromPem(response.serverKey!);
-    }
-    setState(() {
-      context.read<AppBloc>().add(EventCheckExistUser());
-      //     loadDone = true;
-    });
-  }
-
-  Future<bool> loadKeys() async {
     String? myPrivateKey =
         await SharedPreferencesHelper().getString("myPrivateKey");
 
@@ -103,15 +73,31 @@ class _SplashState extends State<Splash> {
     if (StringUtils.isNullOrEmpty(myPrivateKey) ||
         StringUtils.isNullOrEmpty(myPublicKey) ||
         StringUtils.isNullOrEmpty(serverPublicKey)) {
-      return true;
+      final pair = generateRSAkeyPair(exampleSecureRandom());
+      String? myPublicKey = encodePublicKeyToPem(pair.publicKey);
+      var dataSign = AppConstant.appVer! + AppConstant.deviceID! + myPublicKey;
+      AppConstant.rsa = new RSACrypto(pair.privateKey, pair.publicKey);
+      String sign = AppConstant.rsa!.sign(dataSign);
+
+      String? result = await RequestAPI().requestPost(
+          "http://115.84.183.19:9090/EWalletApi/services/auth/key-exchange",
+          jsonEncode(KeyChangeRequest(
+              AppConstant.appVer, AppConstant.deviceID, myPublicKey, sign)));
+      KeyChangeResponse response = KeyChangeResponse.fromJson(jsonDecode(result!));
+      SharedPreferencesHelper()
+          .setString("serverPublicKey", response.serverKey!);
+      AppConstant.rsa?.setServerPublicKey(
+          CryptoUtils.rsaPublicKeyFromPem(serverPublicKey!));
     } else {
-      AppConstant.myPrivateKey =
-          CryptoUtils.rsaPrivateKeyFromPem(myPrivateKey!);
-      AppConstant.myPublicKey = CryptoUtils.rsaPublicKeyFromPem(myPublicKey!);
-      AppConstant.serverPublicKey =
-          CryptoUtils.rsaPublicKeyFromPem(serverPublicKey!);
-      return false;
+      AppConstant.rsa = new RSACrypto(
+          CryptoUtils.rsaPrivateKeyFromPem(myPrivateKey!),
+          CryptoUtils.rsaPublicKeyFromPem(myPublicKey!));
+      AppConstant.rsa?.setServerPublicKey(
+          CryptoUtils.rsaPublicKeyFromPem(serverPublicKey!));
     }
+    setState(() {
+      context.read<AppBloc>().add(EventCheckExistUser());
+    });
   }
 
   @override

@@ -6,14 +6,11 @@ import 'package:pointycastle/pointycastle.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../device/DeviceUtil.dart';
-import '../security/RSA.dart';
+import '../security/RSACrypto.dart';
 
 class AppConstant {
   static final AppConstant _instance = AppConstant._internal();
-  static RSAPrivateKey? myPrivateKey;
-  static RSAPublicKey? myPublicKey;
-  static RSAPublicKey? serverPublicKey;
-  static RSA rsa = new RSA();
+  static RSACrypto? rsa;
   static String? appVer;
   static String? deviceID;
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'ChooseDocumentTypeForKYC.dart';
+
 class PreStartKYC extends StatelessWidget {
   var _controller = TextEditingController();
 
@@ -41,10 +43,10 @@ class PreStartKYC extends StatelessWidget {
   }
 
   moveToLogin(BuildContext context) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => Login(),
-    //     ));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChooseDocumentTypeForKYC(),
+        ));
   }
 }

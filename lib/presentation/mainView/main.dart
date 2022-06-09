@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:iowallet/common/utils/AppConstant.dart';
+import 'package:iowallet/common/utils/SharedPreferencesHelper.dart';
 import 'package:iowallet/generated/l10n.dart';
 import 'package:iowallet/presentation/mainView/common/OTPVerify.dart';
 import 'package:iowallet/presentation/mainView/register/RegisterCompleted.dart';
 
+import '../../common/device/DeviceUtil.dart';
 import '../../generated/l10n.dart';
 import 'App.dart';
 import 'AppBloc.dart';
@@ -22,6 +25,9 @@ import 'noticeboard/NoticeBoard.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  AppConstant();
+  DeviceUtil();
+  SharedPreferencesHelper();
   BlocOverrides.runZoned(() => runApp(const App()),
       blocObserver: AppBlocObserver());
 }

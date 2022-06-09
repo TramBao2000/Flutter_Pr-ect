@@ -13,7 +13,7 @@ import 'package:iowallet/presentation/mainView/common/Policy.dart';
 import 'package:iowallet/presentation/mainView/common/UserManual.dart';
 import 'package:iowallet/presentation/mainView/home/HomeTabBar.dart';
 import '../../../common/network/RequestAPI.dart';
-import '../../../common/security/RSA.dart';
+import '../../../common/security/RSACrypto.dart';
 import '../../../common/utils/SharedPreferencesHelper.dart';
 import '../AppBloc.dart';
 import '../login/Login.dart';
@@ -21,22 +21,22 @@ import '../login/Login.dart';
 class CheckExistUser extends StatelessWidget {
   var _controller = TextEditingController();
   Future<void> checkPhoneNumber() async {
-    String data = jsonEncode(CheckPhoneNumberRequest(_controller.text));
-    String encrypt = RSA().rsaEncrypt(AppConstant.myPublicKey!, jsonEncode("data"));
-    String? myPrivateKey =
-    await SharedPreferencesHelper().getString("myPrivateKey");
-    String? myPublicKey =
-    await SharedPreferencesHelper().getString("myPublicKey");
-    String decrypt = RSA().rsaDecrypt(AppConstant.myPrivateKey!, encrypt);
-    
-    var dataSign = AppConstant.appVer! + AppConstant.deviceID! + encrypt;
-    String sign = RSA().sign(dataSign, AppConstant.myPrivateKey!);
-
-    String? a = await RequestAPI().requestPost(
-        "http://115.84.183.19:9090/EWalletApi/services/auth/check-phone",
-        jsonEncode(DataRequest(AppConstant.appVer, AppConstant.deviceID, encrypt, sign)));
-    DataResponse response = DataResponse.fromJson(jsonDecode(a!));
-    String b = "";
+    // String data = jsonEncode(CheckPhoneNumberRequest(_controller.text));
+    // String encrypt = RSA().rsaEncrypt(AppConstant.myPublicKey!, jsonEncode("data"));
+    // String? myPrivateKey =
+    // await SharedPreferencesHelper().getString("myPrivateKey");
+    // String? myPublicKey =
+    // await SharedPreferencesHelper().getString("myPublicKey");
+    // String decrypt = RSA().rsaDecrypt(AppConstant.myPrivateKey!, encrypt);
+    //
+    // var dataSign = AppConstant.appVer! + AppConstant.deviceID! + encrypt;
+    // String sign = RSA().sign(dataSign, AppConstant.myPrivateKey!);
+    //
+    // String? a = await RequestAPI().requestPost(
+    //     "http://115.84.183.19:9090/EWalletApi/services/auth/check-phone",
+    //     jsonEncode(DataRequest(AppConstant.appVer, AppConstant.deviceID, encrypt, sign)));
+    // DataResponse response = DataResponse.fromJson(jsonDecode(a!));
+    // String b = "";
   }
   @override
   Widget build(BuildContext context) {

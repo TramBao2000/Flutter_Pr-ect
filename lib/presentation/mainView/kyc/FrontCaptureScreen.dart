@@ -4,7 +4,6 @@ import 'package:iowallet/presentation/customWidgets/TabbarTop.dart';
 import 'package:iowallet/presentation/mainView/kyc/BacksideCaptureScreen.dart';
 import 'package:iowallet/presentation/mainView/kyc/FrontCameraOCR.dart';
 import 'package:camera/camera.dart';
-import 'package:custom_switch/custom_switch.dart';
 import 'package:iowallet/presentation/mainView/kyc/FrontCaptureScreen.dart';
 import 'package:iowallet/presentation/mainView/kyc/GuideVideoScreen.dart';
 
@@ -153,7 +152,7 @@ class _FrontCaptureWidgetState extends State<FrontCaptureWidget> {
                         ),
                       ),
                     ),
-                    CustomSwitch(
+                   Switch(
                       activeColor: Color(0xFF50F76B),
                       value: status,
                       onChanged: (value) {

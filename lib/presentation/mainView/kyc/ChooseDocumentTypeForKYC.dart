@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iowallet/presentation/mainView/kyc/FrontCaptureScreen.dart';
 
-class VerifyScreen extends StatelessWidget {
+class ChooseDocumentTypeForKYC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
