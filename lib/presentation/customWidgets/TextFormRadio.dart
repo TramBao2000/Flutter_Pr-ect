@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:group_radio_button/group_radio_button.dart';
 
 class TextFormRadio extends StatefulWidget {
   const TextFormRadio({Key? key, this.title = "", this.imageField = ""})
@@ -11,13 +12,14 @@ class TextFormRadio extends StatefulWidget {
   State<TextFormRadio> createState() => _TextFormRadioState();
 }
 
-enum OS { man, woman }
-
 class _TextFormRadioState extends State<TextFormRadio> {
+  int _stackIndex = 0;
+  String _verticalGroupValue = "Nam";
+
+  List<String> _status = ["Nam", "Nữ"];
   @override
   Widget build(BuildContext context) {
     var _controller = TextEditingController();
-    OS? _os = OS.man;
     return Container(
       margin: const EdgeInsets.only(bottom: 16.0),
       child: Row(
@@ -45,36 +47,26 @@ class _TextFormRadioState extends State<TextFormRadio> {
                     ),
                     Container(child:
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Row(
-                            children: [
-                              Radio(
-                                  value: 1,
-                                  groupValue: 'null',
-                                  onChanged: (index) {}),
-                              Expanded(child: Text('Nam'))
-                            ],
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        RadioGroup<String>.builder(
+                          direction: Axis.horizontal,
+                          groupValue: _verticalGroupValue,
+                          horizontalAlignment: MainAxisAlignment.spaceAround,
+                          onChanged: (value) => setState(() {
+                            if(value != null) {
+                              _verticalGroupValue = value;
+                            }
+                          }),
+                          items: _status,
+                          textStyle: GoogleFonts.poppins(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFF000000),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Row(
-                            children: [
-                              Radio(
-                                  value: 1,
-                                  groupValue: 'null',
-                                  onChanged: (index) {}),
-                              Expanded(child: Text('Nữ'))
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Row(
-                            children: [],
+                          itemBuilder: (item) => RadioButtonBuilder(
+                            item,
+
                           ),
                         ),
                       ],

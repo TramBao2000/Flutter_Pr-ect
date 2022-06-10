@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iowallet/presentation/customWidgets/TabbarTop.dart';
+import 'package:iowallet/presentation/customWidgets/CustomButtonBottom.dart';
 import 'package:iowallet/presentation/customWidgets/TextFormFields.dart';
 import 'package:iowallet/presentation/customWidgets/TextFormRadio.dart';
 import 'package:iowallet/presentation/mainView/kyc/VerifySuccessScreen.dart';
 import 'package:iowallet/presentation/mainView/noticeboard/NoticeBoard.dart';
 
 class InformationVerifyWidget extends StatefulWidget {
-  InformationVerifyWidget({Key?key}) : super(key: key);
+  InformationVerifyWidget({Key? key}) : super(key: key);
 
   @override
-  _InformationVerifyWidgetState createState() => _InformationVerifyWidgetState();
+  _InformationVerifyWidgetState createState() =>
+      _InformationVerifyWidgetState();
 }
+
 class _InformationVerifyWidgetState extends State<InformationVerifyWidget> {
+  final List<String> imageNoteLists = [
+    "assets/icons/icSelfile.png",
+    "assets/icons/icSelfile.png",
+    "assets/icons/icSelfile.png"
+  ];
+  final List<String> titleLists = ['Mặt trước', 'Mặt sau', 'Chân dung'];
+
+  _moveToVerifySuccessScreen(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => VerifySuccess(),
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +68,8 @@ class _InformationVerifyWidgetState extends State<InformationVerifyWidget> {
                         title: "Số giấy tờ",
                         labelText: "222222",
                         imageField: "assets/icons/icInfor.png",
-                        iconField: "assets/icons/iconClose.png"),
+                        iconField: "assets/icons/iconClose.png",
+                        iconNote: true),
                     TextFormFields(
                         title: "Họ và Tên",
                         labelText: "Nguyễn Khánh Bảo Trâm",
@@ -110,117 +127,36 @@ class _InformationVerifyWidgetState extends State<InformationVerifyWidget> {
                     ),
                     Container(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Image(
-                                      width: 80,
-                                      height: 55,
-                                      image: AssetImage(
-                                          "assets/icons/icSelfile.png")),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 8.0),
-                                    child: Text(
-                                      'Mặt trước',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w700,
-                                        color: Color(0xFF2C84D4),
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: List<Widget>.generate(imageNoteLists.length,
+                              (int index) {
+                            return Row(
+                              children: [
+                                Column(
+                                  children: [
+                                    Image(
+                                        width: 80,
+                                        height: 55,
+                                        image:
+                                            AssetImage(imageNoteLists[index])),
+                                    Container(
+                                      margin: const EdgeInsets.only(top: 8.0),
+                                      child: Text(
+                                        titleLists[index],
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700,
+                                          color: Color(0xFF2C84D4),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Image(
-                                      width: 80,
-                                      height: 55,
-                                      image: AssetImage(
-                                          "assets/icons/icSelfile.png")),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 8.0),
-                                    child: Text(
-                                      'Mặt sau',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w700,
-                                        color: Color(0xFF2C84D4),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Column(
-                                children: [
-                                  Image(
-                                      width: 80,
-                                      height: 55,
-                                      image: AssetImage(
-                                          "assets/icons/icSelfile.png")),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 8.0),
-                                    child: Text(
-                                      'Chân dung',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w700,
-                                        color: Color(0xFF2C84D4),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 32.0, bottom: 32.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 25, //height of button
-                      width: 125,
-                      child: ElevatedButton(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Xác nhận',
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          primary: Color(0xFF2C84D4),
-                        ),
-                        onPressed: () => moveToVerifySuccessScreen(context),
-                      ),
+                                  ],
+                                )
+                              ],
+                            );
+                          })),
                     ),
+                    CustomButtonBottom(textTitle: 'Xác nhận', method: _moveToVerifySuccessScreen)
                   ],
                 ),
               ),
@@ -229,19 +165,5 @@ class _InformationVerifyWidgetState extends State<InformationVerifyWidget> {
         ),
       ),
     );
-  }
-  moveToNoticeBoardScreen(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => NoticeBoard(),
-        ));
-  }
-  moveToVerifySuccessScreen(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => VerifySuccess(),
-        ));
   }
 }

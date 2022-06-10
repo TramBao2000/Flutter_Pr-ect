@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iowallet/presentation/customWidgets/CustomButtonBottom.dart';
 import 'package:iowallet/presentation/mainView/home/Home.dart';
 import 'package:iowallet/presentation/mainView/noticeboard/NoticeBoard.dart';
 
 class VerifySuccess extends StatelessWidget {
 
-  const VerifySuccess({
-    Key? key,
-  }) : super(key: key);
+  void _moveToNoticeBoardScreen(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Home(),
+        ));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,44 +45,9 @@ class VerifySuccess extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      child: Row(
-                        children: [
-                          Text(
-                            'Về trang chủ',
-                            style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        primary: Color(0xFF2C84D4),
-                      ),
-                      onPressed: () => moveToNoticeBoardScreen(context),
-                    ),
-                  ],
-                ),
-              ),
+              CustomButtonBottom(textTitle: "Về trang chủ", method: _moveToNoticeBoardScreen)
             ],
           ),
-        ));
-  }
-
-  moveToNoticeBoardScreen(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Home(),
         ));
   }
 }

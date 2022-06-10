@@ -49,8 +49,11 @@ dependencies:
   google_fonts: ^3.0.1
   flutter_image_slideshow: ^0.1.2
   dio: ^4.0.6
-  camera: 0.9.7+1
+  custom_switch: 0.0.1
   youtube_player_flutter: ^8.1.0
+  super_tooltip: ^1.0.1
+  group_radio_button: ^1.2.0
+  camera: ^0.9.7+1
   flutter_localizations:
     sdk: flutter
 

@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:iowallet/presentation/customWidgets/CustomButtonBottom.dart';
 
 import 'ChooseDocumentTypeForKYC.dart';
 
 class PreStartKYC extends StatelessWidget {
   var _controller = TextEditingController();
+
+  _moveToChooseTypeKYC(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChooseDocumentTypeForKYC(),
+        ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,31 +31,9 @@ class PreStartKYC extends StatelessWidget {
             child: Text(
                 "Quý khách vui lòng xác thực tài khoản để có thể sử dụng các dịch vụ do Ví điện tử IO cung cấp"),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 30.0),
-            child: ElevatedButton(
-              child: Text('Xác thực tài khoản'),
-              onPressed: () => moveToLogin(context),
-            ),
-          ),
+          CustomButtonBottom(textTitle: "Bắt đầu xác thực", method: _moveToChooseTypeKYC)
         ]),
       ),
     );
-  }
-
-  moveToHome(BuildContext context) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => HomeTabBar(),
-    //     ));
-  }
-
-  moveToLogin(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ChooseDocumentTypeForKYC(),
-        ));
   }
 }

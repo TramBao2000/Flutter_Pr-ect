@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iowallet/presentation/customWidgets/CustomButtonBottom.dart';
+import 'package:iowallet/presentation/mainView/home/Home.dart';
 
 class VerifyFail extends StatelessWidget {
 
@@ -10,6 +12,14 @@ class VerifyFail extends StatelessWidget {
     this.appBarTitle = "",
     this.textContend = "",
   }) : super(key: key);
+
+  void _moveToNoticeBoardScreen(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Home(),
+        ));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,38 +52,9 @@ class VerifyFail extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      child: Row(
-                        children: [
-                          Text(
-                            'xác thực tài khoản',
-                            style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        primary: Color(0xFF2C84D4),
-                      ),
-                      onPressed: () => moveToVerifyScreen,
-                    ),
-                  ],
-                ),
-              ),
+              CustomButtonBottom(textTitle: "Về trang chủ", method: _moveToNoticeBoardScreen)
             ],
           ),
         ));
   }
-
-  moveToVerifyScreen(BuildContext context) {}
 }
