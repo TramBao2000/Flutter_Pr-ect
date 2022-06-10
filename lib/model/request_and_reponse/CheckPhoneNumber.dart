@@ -10,4 +10,18 @@ class CheckPhoneNumberRequest {
       };
 }
 
-class CheckPhoneNumberResponse {}
+class CheckPhoneNumberResponse {
+  String? phoneNumber;
+  bool?  status;
+  CheckPhoneNumberResponse(String phoneNumber, bool status){
+    this.phoneNumber = phoneNumber;
+    this.status = status;
+  }
+
+  factory CheckPhoneNumberResponse.fromJson(dynamic json){
+    return CheckPhoneNumberResponse(
+      json["phoneNumber"] as String,
+      json["status"] as bool
+    );
+  }
+}

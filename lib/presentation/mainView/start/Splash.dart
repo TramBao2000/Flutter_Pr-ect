@@ -38,27 +38,7 @@ class _SplashState extends State<Splash> {
     WidgetsBinding.instance.addPostFrameCallback((_) => loadServerKey());
   }
 
-  // Future<void> loadStateApp() async {
-  //   final receivePort = ReceivePort();
-  //
-  //   final isolate = await Isolate.spawn(
-  //     loadServerKey,
-  //     [receivePort.sendPort, 3],
-  //   );
-  //
-  //   receivePort.listen((message) {
-  //     setState(() {
-  //       context.read<AppBloc>().add(EventCheckExistUser());
-  //       //     loadDone = true;
-  //     });
-  //     receivePort.close();
-  //     isolate.kill();
-  //   });
-  // }
-
   Future<void> loadServerKey() async {
-    // final pair = generateRSAkeyPair(exampleSecureRandom());
-
     AppConstant.appVer = await DeviceUtil().getAppVersion();
     AppConstant.deviceID = await DeviceUtil().getDeviceID();
     String? myPrivateKey =
@@ -83,7 +63,8 @@ class _SplashState extends State<Splash> {
           "http://115.84.183.19:9090/EWalletApi/services/auth/key-exchange",
           jsonEncode(KeyChangeRequest(
               AppConstant.appVer, AppConstant.deviceID, myPublicKey, sign)));
-      KeyChangeResponse response = KeyChangeResponse.fromJson(jsonDecode(result!));
+      KeyChangeResponse response =
+          KeyChangeResponse.fromJson(jsonDecode(result!));
       SharedPreferencesHelper()
           .setString("serverPublicKey", response.serverKey!);
       AppConstant.rsa?.setServerPublicKey(

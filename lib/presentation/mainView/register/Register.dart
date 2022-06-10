@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:iowallet/common/network/RequestAPI.dart';
+import 'package:iowallet/common/utils/AppConstant.dart';
+import 'package:iowallet/model/request_and_reponse/Data.dart';
+import 'package:iowallet/model/request_and_reponse/Email.dart';
 import 'package:iowallet/presentation/mainView/AppBloc.dart';
 import 'package:iowallet/presentation/mainView/AppEvents.dart';
 
@@ -167,7 +173,8 @@ class _RegisterState extends State<Register> {
                       child: ElevatedButton(
                         child: Text('Tiếp tục'),
                         onPressed: (){
-                          context.read<AppBloc>().add(EventCreatePassword());
+                          checkEmail(context);
+                        //  context.read<AppBloc>().add(EventCreatePassword());
                         },
                       ),
                     ),
@@ -182,5 +189,28 @@ class _RegisterState extends State<Register> {
             ),
           ),
         ));
+  }
+
+  Future<void> checkEmail(BuildContext context) async {
+    String data = jsonEncode(
+        EmailRequest("hgfhgf"));
+    String encrypt = AppConstant.rsa!.encrypt(data);
+
+    var dataSign = AppConstant.appVer! + AppConstant.deviceID! + encrypt;
+    String sign = AppConstant.rsa!.sign(dataSign);
+
+    String? result = await RequestAPI().requestPost(
+        "http://115.84.183.19:9090/EWalletApi/services/auth/check-email",
+        jsonEncode(DataRequest(
+            AppConstant.appVer, AppConstant.deviceID, encrypt, sign)));
+    DataResponse dataResponse = DataResponse.fromJson(jsonDecode(result!));
+    EmailResponse emailResponse = EmailResponse.fromJson(
+        jsonDecode(AppConstant.rsa!.decrypt(dataResponse.data!)));
+    if (emailResponse.status == true) {
+      context.read<AppBloc>().add(EventCreatePassword());
+    } else {
+      //Báo lỗi
+      //context.read<AppBloc>().add(EventRegister());
+    }
   }
 }

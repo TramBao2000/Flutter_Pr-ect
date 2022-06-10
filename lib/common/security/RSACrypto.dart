@@ -10,28 +10,36 @@ class RSACrypto {
   late RSAPublicKey serverPublicKey;
   late RSASigner rsaSigner;
   late Signer signer;
-  late RSA rsa;
+  late RSASigner rsaVerifier;
+  late Signer verifier;
+  late RSA rsaEncrypt;
+  late RSA rsaDecrypt;
   late Encrypter encrypter;
+  late Encrypter decrypter;
 
   RSACrypto(RSAPrivateKey myPrivateKey, RSAPublicKey myPublicKey){
     this.myPrivateKey = myPrivateKey;
     this.myPublicKey = myPublicKey;
-    this.rsaSigner = RSASigner(RSASignDigest.SHA256, publicKey: myPublicKey, privateKey: myPrivateKey);
+    this.rsaSigner = RSASigner(RSASignDigest.SHA256, privateKey: myPrivateKey);
     this.signer = Signer(rsaSigner);
-    this.rsa = RSA(publicKey: myPublicKey, privateKey: myPrivateKey);
-    this.encrypter = Encrypter(rsa);
+    this.rsaDecrypt = RSA(privateKey: myPrivateKey);
+    this.decrypter = Encrypter(rsaDecrypt);
   }
 
   void setServerPublicKey(RSAPublicKey serverPublicKey){
     this.serverPublicKey = serverPublicKey;
+    this.rsaEncrypt = RSA(publicKey: serverPublicKey);
+    this.encrypter = Encrypter(rsaEncrypt);
+    this.rsaVerifier = RSASigner(RSASignDigest.SHA256, publicKey: serverPublicKey);
+    this.verifier = Signer(rsaVerifier);
   }
 
-  String rsaEncrypt(RSAPublicKey myPublic, String dataToEncrypt) {
+  String encrypt(String dataToEncrypt) {
     return encrypter.encryptCustom(dataToEncrypt);
   }
 
-  String rsaDecrypt(RSAPrivateKey myPrivate, String datatoDecrypt) {
-    return encrypter.decryptCustom(datatoDecrypt);
+  String decrypt(String datatoDecrypt) {
+    return decrypter.decryptCustom(datatoDecrypt);
   }
 
   String sign(String plainText) {
@@ -39,6 +47,6 @@ class RSACrypto {
   }
 
   bool verify(String plainText, String sign,) {
-    return signer.verifyCustom(plainText, sign);
+    return verifier.verifyCustom(plainText, sign);
   }
 }

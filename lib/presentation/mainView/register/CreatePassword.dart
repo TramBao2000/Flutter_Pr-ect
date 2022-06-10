@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:iowallet/common/network/RequestAPI.dart';
+import 'package:iowallet/common/utils/AppConstant.dart';
+import 'package:iowallet/model/request_and_reponse/Data.dart';
+import 'package:iowallet/model/request_and_reponse/Register.dart';
 import 'package:iowallet/presentation/mainView/AppBloc.dart';
 import 'package:iowallet/presentation/mainView/AppEvents.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -12,9 +18,11 @@ class CreatePassword extends StatefulWidget {
   @override
   _CreatePasswordState createState() => _CreatePasswordState();
 }
+
 class _CreatePasswordState extends State<CreatePassword> {
   var _controller = TextEditingController();
   bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -45,11 +53,11 @@ class _CreatePasswordState extends State<CreatePassword> {
                           top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                       padding: const EdgeInsets.only(
                           top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                      child: Text("Tạo mật khẩu cho ví",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold
-                      ),),),
-
+                      child: Text(
+                        "Tạo mật khẩu cho ví",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
                     Container(
                       margin: const EdgeInsets.only(
                           top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
@@ -90,17 +98,20 @@ class _CreatePasswordState extends State<CreatePassword> {
                           //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
                           //but you can show anything you want here, like your pop up saying wrong paste format or etc
                           return true;
-                        }, appContext: context,
-                      ),),
+                        },
+                        appContext: context,
+                      ),
+                    ),
                     Container(
                       margin: const EdgeInsets.only(
                           top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                       padding: const EdgeInsets.only(
                           top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
-                      child: Text("Xác nhận mật khẩu",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold
-                        ),),),
+                      child: Text(
+                        "Xác nhận mật khẩu",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
                     Container(
                       margin: const EdgeInsets.only(
                           top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
@@ -141,14 +152,17 @@ class _CreatePasswordState extends State<CreatePassword> {
                           //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
                           //but you can show anything you want here, like your pop up saying wrong paste format or etc
                           return true;
-                        }, appContext: context,
-                      ),),
+                        },
+                        appContext: context,
+                      ),
+                    ),
                     Container(
                       margin: const EdgeInsets.only(top: 30.0),
                       child: ElevatedButton(
                         child: Text('Xác nhận'),
-                        onPressed: (){
-                          context.read<AppBloc>().add(EventOTPVerify());
+                        onPressed: () {
+                          registerNewUser(context);
+                          //context.read<AppBloc>().add(EventOTPVerify());
                         },
                       ),
                     ),
@@ -160,19 +174,26 @@ class _CreatePasswordState extends State<CreatePassword> {
         ));
   }
 
-  moveToHome(BuildContext context) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => HomeTabBar(),
-    //     ));
-  }
+  Future<void> registerNewUser(BuildContext context) async {
+    String data = jsonEncode(
+        RegisterRequest("hgfhgf", "hgfhgf", "phoneNumber", "password"));
+    String encrypt = AppConstant.rsa!.encrypt(data);
 
-  moveToLogin(BuildContext context) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => Login(),
-    //     ));
+    var dataSign = AppConstant.appVer! + AppConstant.deviceID! + encrypt;
+    String sign = AppConstant.rsa!.sign(dataSign);
+
+    String? result = await RequestAPI().requestPost(
+        "http://115.84.183.19:9090/EWalletApi/services/auth/register",
+        jsonEncode(DataRequest(
+            AppConstant.appVer, AppConstant.deviceID, encrypt, sign)));
+    DataResponse dataResponse = DataResponse.fromJson(jsonDecode(result!));
+    RegisterResponse registerResponse = RegisterResponse.fromJson(
+        jsonDecode(AppConstant.rsa!.decrypt(dataResponse.data!)));
+    if (registerResponse.timeOutOtp! > 0) {
+      context.read<AppBloc>().add(EventOTPVerify());
+    } else {
+      //Báo lỗi
+      //context.read<AppBloc>().add(EventRegister());
+    }
   }
 }

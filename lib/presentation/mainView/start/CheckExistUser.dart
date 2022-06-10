@@ -20,24 +20,29 @@ import '../login/Login.dart';
 
 class CheckExistUser extends StatelessWidget {
   var _controller = TextEditingController();
-  Future<void> checkPhoneNumber() async {
-    // String data = jsonEncode(CheckPhoneNumberRequest(_controller.text));
-    // String encrypt = RSA().rsaEncrypt(AppConstant.myPublicKey!, jsonEncode("data"));
-    // String? myPrivateKey =
-    // await SharedPreferencesHelper().getString("myPrivateKey");
-    // String? myPublicKey =
-    // await SharedPreferencesHelper().getString("myPublicKey");
-    // String decrypt = RSA().rsaDecrypt(AppConstant.myPrivateKey!, encrypt);
-    //
-    // var dataSign = AppConstant.appVer! + AppConstant.deviceID! + encrypt;
-    // String sign = RSA().sign(dataSign, AppConstant.myPrivateKey!);
-    //
-    // String? a = await RequestAPI().requestPost(
-    //     "http://115.84.183.19:9090/EWalletApi/services/auth/check-phone",
-    //     jsonEncode(DataRequest(AppConstant.appVer, AppConstant.deviceID, encrypt, sign)));
-    // DataResponse response = DataResponse.fromJson(jsonDecode(a!));
-    // String b = "";
+
+  Future<void> checkPhoneNumber(BuildContext context) async {
+    String data = jsonEncode(CheckPhoneNumberRequest(_controller.text));
+    String encrypt = AppConstant.rsa!.encrypt(data);
+
+    var dataSign = AppConstant.appVer! + AppConstant.deviceID! + encrypt;
+    String sign = AppConstant.rsa!.sign(dataSign);
+
+    String? result = await RequestAPI().requestPost(
+        "http://115.84.183.19:9090/EWalletApi/services/auth/check-phone",
+        jsonEncode(DataRequest(
+            AppConstant.appVer, AppConstant.deviceID, encrypt, sign)));
+    DataResponse dataResponse = DataResponse.fromJson(jsonDecode(result!));
+    CheckPhoneNumberResponse checkPhoneNumberResponse =
+        CheckPhoneNumberResponse.fromJson(
+            jsonDecode(AppConstant.rsa!.decrypt(dataResponse.data!)));
+    if (checkPhoneNumberResponse.status == true) {
+      context.read<AppBloc>().add(EventLogin());
+    } else {
+      context.read<AppBloc>().add(EventRegister());
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -134,9 +139,12 @@ class CheckExistUser extends StatelessWidget {
                       child: Center(
                         child: Row(
                           children: [
-                            Icon(Icons.new_releases, color: Colors.red,),
-                            Expanded(child:
-                            Text(
+                            Icon(
+                              Icons.new_releases,
+                              color: Colors.red,
+                            ),
+                            Expanded(
+                                child: Text(
                               "Số điện thoại không chính xác. Quý khách vui lòng kiểm tra lại",
                               style: TextStyle(color: Colors.red),
                               maxLines: 10,
@@ -151,8 +159,7 @@ class CheckExistUser extends StatelessWidget {
                     child: ElevatedButton(
                       child: Text('Tiếp tục'),
                       onPressed: () {
-                        context.read<AppBloc>().add(EventRegister());
-                       // checkPhoneNumber();
+                        checkPhoneNumber(context);
                       },
                     ),
                   ),
